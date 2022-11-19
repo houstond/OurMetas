@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="../media/image/icon.png">
+    <meta name="viewport" content="width=device-width ,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <title>OurMetas</title>
+</head>
+<link href="../common.css" rel="stylesheet">
+<style type="text/css">
+    video {
+        display: inline-block;
+        vertical-align: baseline;
+    }
+
+    .cover_before {
+        animation: mask-out 1s;
+        -moz-animation: mask-out 1s; /* Firefox */
+        -webkit-animation: mask-out 1s; /* Safari and Chrome */
+        -o-animation: mask-out 1s; /* Opera */
+        animation-fill-mode: forwards;
+    }
+
+    .cover_after {
+        left: 0;
+        /*background:rgba(128,128,128,0.5);*/
+        animation: mask-in 1s;
+        -moz-animation: mask-in 1s; /* Firefox */
+        -webkit-animation: mask-in 1s; /* Safari and Chrome */
+        -o-animation: mask-in 1s; /* Opera */
+        animation-fill-mode: forwards;
+
+    }
+
+    @keyframes mask-out {
+        from {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        to {
+        }
+    }
+
+    @keyframes mask-in {
+        from {
+        }
+        to {
+            background: rgba(0, 0, 0, 0.3);
+        }
+    }
+
+    .hidden_body_before {
+        /*background:rgba(128,128,128,0.5);*/
+        animation: sidebar-in 0.7s;
+        -moz-animation: sidebar-in 0.7s; /* Firefox */
+        -webkit-animation: sidebar-in 0.7s; /* Safari and Chrome */
+        -o-animation: sidebar-in 0.7s; /* Opera */
+        animation-fill-mode: forwards;
+    }
+
+    .sidebar-animation {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    .hidden_body_after {
+        /*background:rgba(128,128,128,0.5);*/
+        animation: sidebar-out 0.7s;
+        -moz-animation: sidebar-out 0.7s; /* Firefox */
+        -webkit-animation: sidebar-out 0.7s; /* Safari and Chrome */
+        -o-animation: sidebar-out 0.7s; /* Opera */
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes sidebar-out {
+        from {
+            right: -100vw;
+        }
+        to {
+            right: 0;
+        }
+    }
+
+    @keyframes sidebar-in {
+        from {
+            right: 0;
+        }
+        to {
+            right: -100vw;
+        }
+    }
+
+    .link-text {
+        border-top: 1px solid #353535;
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        color: #ffffff;
+        font-weight: 700;
+        padding: 15px 15px 15px 25px;
+    }
+
+    .info-text {
+        line-height: 20px;
+        font-size: 12px;
+        color: #ffffff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    }
+
+    .first-button-text {
+        position: absolute;
+        top: 0;
+        bottom: 4px;
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+        font-weight: bold;
+        left: 57px;
+        color: #a73b02;
+    }
+
+    .second-button-text {
+        position: absolute;
+        top: 0;
+        bottom: 3px;
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+        font-weight: bold;
+        left: 46px;
+        color: #1a1a1a;
+    }
+
+    .ide-download-tip {
+        font-size: 12px;
+        color: #ffffff;
+        margin-top: 15px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    }
+</style>
+<script type="text/javascript">
+    function play() {
+        document.getElementById("play").style.zIndex = "-1";
+        document.getElementById("poster").style.display = "none";
+        let audio = document.getElementById("video");
+        // show();
+        audio.play();
+    }
+
+    function showMenu() {
+        document.getElementById("hidden_body").className = "hidden_body_after";
+        document.getElementById("hidden_body").style.display = "flex";
+        document.getElementById("cover").style.display = "block";
+        document.getElementById("cover").className = "cover_after";
+    }
+
+    function hideMenu() {
+        event.stopPropagation();
+        document.getElementById("hidden_body").className = "hidden_body_before";
+        document.getElementById("cover").className = "cover_before";
+        document.getElementById("cover").style.display = "none";
+    }
+
+    window.onload = function () {
+        const ua = navigator.userAgent;
+        if (!!ua.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) || ua.indexOf('iPad') > -1) {
+        } else {
+            document.getElementById("button-download-android").style.display = "";
+            document.getElementById("button-download-android-mask").style.display = "";
+        }
+    }
+
+</script>
+<body>
+<div style="overflow: hidden;display: flex;flex-direction: column;position: fixed;width: 100%;height: 100%">
+    <div style="position:relative;width: 100%;display: flex;justify-self: center;align-items: center">
+        <!--<img src="../media/image/background_mobile.jpg" style="width: 100%" draggable="false">-->
+        <video id="video" controls="controls" poster="../media/image/poster_video_mobile.jpg" style="width:100%">
+            <source src="../media/video/background.mp4" type="video/mp4">
+        </video>
+        <div id="poster" onclick="play()"
+             style="background-image: url(../media/image/poster_video_mobile.jpg);display: flex;justify-content:center;align-items:center;position:absolute;width: 100%;height: 100%;background-size: cover">
+            <img id="play" src="../media/image/button_play_video.png" style="width: 13%;display: block;">
+        </div>
+    </div>
+    <div style="padding-top:10%;padding-bottom:2%;flex: 1;display: flex;align-items: center;flex-direction: column;justify-content:space-between;background: url(../media/image/background_mobile.jpg) bottom;background-size: cover">
+        <div style="display: flex;flex-direction: column;align-items: center">
+            <img src="../media/image/logo.png" style="width: 65%;">
+            <div style="width: 100%;text-align: center;font-size: 14px;color: #ffffff;margin-top: 10px">针对7-16岁的编程比赛平台
+            </div>
+        </div>
+        <div style="display: flex;flex-direction: column;align-items: center;padding-bottom: 30%;">
+            <a href="http://h5.metaverse.woxiao.net/" style="position: relative;padding-bottom: 2%;">
+                <img src="../media/image/button_open_ugc.png" style="height: 50px">
+                <div class="second-button-text">进入社区</div>
+            </a>
+            <a id="button-download-android" href="https://resource.metaverse.woxiao.net/apk/metaverse.apk"
+               style="display: none;position: relative;margin-top: 15px">
+                <img src="../media/image/button_download_apk.png" style="height: 50px">
+                <div class="second-button-text">APP下载</div>
+            </a>
+            <div class="ide-download-tip">请用PC浏览器访问下载编程工具</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

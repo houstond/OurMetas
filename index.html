@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="media/image/icon.png">
+    <meta name="viewport" content="width=device-width ,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+    <title>OurMetas</title>
+    <link href="common.css" rel="stylesheet">
+    <style>
+        .link-text {
+            margin-left: 40px;
+            font-size: 18px;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            white-space: nowrap;
+        }
+
+        .info-text {
+            line-height: 20px;
+            font-size: 12px;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        .common-button-text {
+            position: absolute;
+            top: 0;
+            bottom: 5px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <script type="text/javascript">
+        var mobileAgent = ["iphone", "ipod", "ipad", "android", "mobile", "blackberry", "webos", "incognito", "webmate", "bada", "nokia", "lg", "ucweb", "skyfire"];
+        var browser = navigator.userAgent.toLowerCase();
+        var isMobile = false;
+        for (var i = 0; i < mobileAgent.length; i++) {
+            if (browser.indexOf(mobileAgent[i]) !== -1) {
+                isMobile = true;
+                location.href = 'mobile/index.html';
+                break;
+            }
+        }
+
+        function toggleMute() {
+            var video = document.getElementById('video');
+            var muteBtn = document.getElementById('muteBtn');
+
+            if (video.muted) {
+                muteBtn.src = 'media/image/button_unmute.svg';
+            } else {
+                muteBtn.src = 'media/image/button_mute.svg';
+            }
+
+            video.muted = !video.muted;
+        }
+
+        function showQRCode() {
+            document.getElementById("app-qrcode").style.display = '';
+        }
+
+        function hideQRCode() {
+            document.getElementById("app-qrcode").style.display = "none";
+        }
+
+        window.onload = function () {
+            var video = document.getElementById('video');
+            video.addEventListener('contextmenu', function (e) {
+                e.preventDefault(); //屏蔽视频右键
+            });
+        };
+
+    </script>
+</head>
+<body>
+<div style="position: fixed;width: 100%;height: 100%;min-width: 1280px;min-height: 720px;">
+    <video id="video" muted loop="loop" autoplay style="object-fit: cover;width:100% ;height: 100%">
+        <source src="media/video/background.mp4" type='video/mp4;'>
+    </video>
+    <div style="position: absolute;left: 4.21vw;top: 4.16vh;">
+        <img style="width: 230px;" src="media/image/logo.png" draggable="false"/>
+        <div style="width: 100%;text-align: center;font-size: 14px;color: #ffffff;margin-top: 10px">针对7-16岁的编程比赛平台
+        </div>
+    </div>
+    <div style="position: absolute;top: 5.55vh;right: 7.29vw;display: flex;align-items: center">
+        <img id="muteBtn" src="media/image/button_mute.svg" style="margin-left: 40px;width: 22px;cursor: pointer"
+             onclick="toggleMute()">
+    </div>
+    <div style="position: absolute;top: calc(50% - 36px);right: 7.29vw;display: flex;flex-direction: column;align-items: flex-end;">
+        <img style="width: 420px" src="media/image/title.png"/>
+        <div style="margin-top: 30px;display: flex;">
+            <div id="ide-button" style="position: relative;cursor: pointer">
+                <a href="https://resource.metaverse.woxiao.net/install/metaverse.net.exe">
+                    <img style="height: 55px" src="media/image/button_download_ide.png">
+                    <div class="common-button-text" style="left: 62px;color: #a73b02">下载编程工具</div>
+                </a>
+            </div>
+            <div id="ugc-button" style="margin-left: 10px;position: relative;cursor: pointer">
+                <a href="http://h5.metaverse.woxiao.net/">
+                    <img style="height: 55px" src="media/image/button_open_ugc.png">
+                    <div class="common-button-text" style="left: 50px;color: #1a1a1a">进入社区</div>
+                </a>
+            </div>
+            <div id="app-button" style="margin-left: 10px;position: relative" onmouseenter="showQRCode()"
+                 onmouseleave="hideQRCode()">
+                <div id="app-qrcode"
+                     style="display: none;position: absolute;top: 100%;right: 0;margin-top: 20px;padding: 10px;
+                     background-color: #ffffff;border-radius: 8px;box-shadow: 0 0 10px 6px rgba(0,0,0,0.5)">
+                    <img src="media/image/qrcode_apk.png">
+                </div>
+                <img style="height: 55px" src="media/image/qrcode_download_app_pc.png">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
